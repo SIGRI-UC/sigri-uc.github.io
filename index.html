@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIGRI-UC</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#111827}
+.wrap{max-width:900px;margin:auto;padding:14px}
+.card{background:#fff;border:1px solid #d1d5db;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.head{padding:18px}
+.brand{font-size:24px;font-weight:900}
+.sub{color:#6b7280;font-size:12px;margin-top:4px}
+.uc{font-size:46px;font-weight:900;margin-top:12px}
+h2{margin:0;background:#111827;color:#fff;padding:11px 14px;font-size:15px}
+.rows{padding:6px 14px 12px}
+.row{display:grid;grid-template-columns:190px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid #e5e7eb}
+.row:last-child{border-bottom:0}
+.label{font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase}
+.value{font-size:14px;font-weight:700;word-break:break-word}
+.dna{font-family:Consolas,monospace;word-break:break-all}
+@media(max-width:640px){.row{grid-template-columns:1fr}.uc{font-size:38px}.wrap{padding:8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card head">
+    <div class="brand">HIPERFERRO INDUSTRIAL</div>
+    <div class="sub">SIGRI-UC | RASTREABILIDADE</div>
+    <div class="uc" id="ucTopo">—</div>
+    <div id="produtoTopo" style="font-weight:800;margin-top:6px">—</div>
+  </div>
+
+  <div class="card">
+    <h2>FABRICAÇÃO</h2>
+    <div class="rows">
+      <div class="row"><div class="label">Processo</div><div class="value" id="prc"></div></div>
+      <div class="row"><div class="label">Identificador</div><div class="value" id="id"></div></div>
+      <div class="row"><div class="label">OP</div><div class="value" id="op"></div></div>
+      <div class="row"><div class="label">Data / fim</div><div class="value" id="fim"></div></div>
+      <div class="row"><div class="label">Máquina</div><div class="value" id="maq"></div></div>
+      <div class="row"><div class="label">Operador</div><div class="value" id="oper"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>MATÉRIA-PRIMA</h2>
+    <div class="rows">
+      <div class="row"><div class="label">ID recebimento</div><div class="value" id="rec"></div></div>
+      <div class="row"><div class="label">UC mãe / chave raiz</div><div class="value" id="ucr"></div></div>
+      <div class="row"><div class="label">Lote</div><div class="value" id="lot"></div></div>
+      <div class="row"><div class="label">Subgrupo</div><div class="value" id="sgm"></div></div>
+      <div class="row"><div class="label">Produto</div><div class="value" id="prdm"></div></div>
+      <div class="row"><div class="label">Peso líquido</div><div class="value" id="pl"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>PRODUTO ACABADO</h2>
+    <div class="rows">
+      <div class="row"><div class="label">UC</div><div class="value" id="uc"></div></div>
+      <div class="row"><div class="label">Subgrupo</div><div class="value" id="sgp"></div></div>
+      <div class="row"><div class="label">Produto acabado</div><div class="value" id="prda"></div></div>
+      <div class="row"><div class="label">Espessura</div><div class="value" id="esp"></div></div>
+      <div class="row"><div class="label">Largura</div><div class="value" id="lar"></div></div>
+      <div class="row"><div class="label">Comprimento</div><div class="value" id="comp"></div></div>
+      <div class="row"><div class="label">Peso referência</div><div class="value" id="pref"></div></div>
+      <div class="row"><div class="label">Quantidade</div><div class="value" id="qtd"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>RASTREABILIDADE</h2>
+    <div class="rows">
+      <div class="row"><div class="label">Código DNA</div><div class="value dna" id="dna"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const p=new URLSearchParams(location.search);
+const keys=["prc","id","op","fim","maq","oper","rec","ucr","lot","sgm","prdm","pl","uc","sgp","prda","esp","lar","comp","pref","qtd","dna"];
+function v(k){const x=p.get(k);return x&&x.trim()?x:"—"}
+keys.forEach(k=>{const e=document.getElementById(k);if(e)e.textContent=v(k)});
+document.getElementById("ucTopo").textContent="UC "+v("uc");
+document.getElementById("produtoTopo").textContent=v("prda");
+document.title="SIGRI-UC "+v("uc");
+</script>
+</body>
+</html>
